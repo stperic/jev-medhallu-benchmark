@@ -133,3 +133,106 @@ reported as such, not replaced.
 **What the post must say:** Luna and Gemini 3.8 Flash ran with reasoning set to
 `none` and `minimal` (a pipeline setting, unlike Stanford's defaults), and all
 four got an untuned LLM prompt while Jev's question was tuned on dev.
+
+# Follow-up checks after an external critique. Choices fixed before the runs
+
+Written 2026-09-22, after the four LLM rows were scored and before any of the
+runs below. A reviewer argued that the tie with the fast LLMs rests on uneven
+tuning, that the timing was noisy, and that MedHallu's machine-written
+hallucinations may be detectable by style. Three checks follow. None of them
+changes Jev's question or threshold: Jev runs exactly as in run 2 (question in
+`data/task.json`, threshold 0.65), and the four LLMs run exactly as in "Added
+LLM rows" (same specs, settings and pinned providers). Every result below is
+reported whatever it shows.
+
+Already computed from existing run files, for the record: with the same
+untuned MedHELM-style wording the LLMs got, Jev run 1 (90.3% at its
+dev-chosen threshold 0.85) is significantly below Gemini 3.5 Flash Lite
+(McNemar p 0.0003) and GPT-5.6 Luna (p 0.004), level with Claude Haiku 4.5
+(p 0.08), and above Gemini 3.8 Flash (p 0.007). At the untuned threshold 0.5
+it scores 81.9%.
+
+## Check 1: the same test items without the abstract
+
+**Question.** How much of each model's score comes from checking the answer
+against the abstract? In MedHallu the faithful answers are the study authors'
+own conclusions and the hallucinated ones were written by a model, so a model
+could score well from the wording of the answer, or from its own medical
+knowledge, without using the source.
+
+- **Items:** `data/items.test-nosource.jsonl`, written by
+  `datasets/medhallu/ablate_source.py`: the 1,000 test items with `knowledge`
+  replaced by the text "Not provided." and nothing else changed, so every
+  prompt is identical to the original run except for the source.
+- **Models:** `jev-1.13` and the four LLM specs of `test-v2`. Output folder
+  `runs/medhallu/test-nosource`. Concurrency 4 (accuracy only, not timed).
+- **Reported:** accuracy with and without the source per model, the drop, a
+  paired exact McNemar test between the two, and Jev's AUROC without the
+  source. The floor is 52.0% (always "faithful"). Staying well above 52%
+  without the source means part of the score does not come from the source.
+
+## Check 2: the four LLMs asked Jev's question
+
+**Question.** Did Jev's plain question help Jev only, or would the LLMs gain
+from it too?
+
+- **Task:** `variants/llm-authors-question.task.json`: `data/task.json` with
+  the instructions replaced by Jev's run-2 question, "Would the authors of the
+  study described in `knowledge` say that `answer` misrepresents their
+  findings?", and the labels by `1: Yes` / `0: No` (1 is positive, as before).
+  The question was chosen on dev with Jev only; the LLMs get it untried.
+- **Models and settings:** the four LLM specs of `test-v2`, test split, one
+  pass, concurrency 4, output `runs/medhallu/test-llm-authors-question`.
+- **Reported:** each LLM with this question against its own `test-v2` result
+  and against Jev run 2, paired exact McNemar, Holm-corrected within each
+  family of four.
+
+## Check 3: re-timing all five models in one alternating session
+
+**Question.** Does the time gap survive when every model is timed in the same
+session, removing the one-day gap between Jev's run and the LLMs'?
+
+- **Items:** the first 200 test items, in 10 rounds of 20. Each round runs all
+  five models one after another, with the order rotated every round, one
+  request at a time, one untimed warm-up call per model per round. Nothing else
+  runs on the machine during this check. Output `runs/medhallu/timing-interleaved`.
+- **Models:** `jev-1.13` and the four LLM specs of `test-v2`, providers pinned
+  as before.
+- **Reported:** median and 95th-percentile time per model, and the ratio to
+  Jev, next to the `test-v2` figures. These answers are a timing repeat of an
+  unchanged configuration, not a new accuracy result.
+
+Not done, with reasons: log-probabilities (none of the four LLMs offer them
+through OpenRouter), time to first token (the answers are about 10 tokens, so
+it is close to the total time), direct provider APIs and default-reasoning
+rows (budget; possible later).
+
+## Results of the follow-up checks (2026-09-22)
+
+All 10,000 calls (5,000 + 4,000 + 1,000) completed with no errors. Some
+Anthropic and Google calls were retried after transport failures, as planned.
+Tables:
+`uv run datasets/medhallu/followup_checks.py`.
+
+**Check 1, without the abstract.** Every model stays well above the 52% floor:
+Jev 66.4% at its threshold 0.65 (AUROC 0.927, against 0.974 with the
+abstract), GPT-5.6 Luna 73.5%, Gemini 3.5 Flash Lite 71.8%, Claude Haiku 4.5
+77.9%, Gemini 3.8 Flash 82.9%. The abstract still matters for every model
+(drops of 4.3 to 26.5 points, all significant), least for Gemini 3.8 Flash.
+Jev's large drop at a fixed threshold is partly calibration: without the
+abstract its probabilities shift down, and its AUROC stays high. So a large
+share of MedHallu can be solved from the question and answer alone, through
+their wording or the model's own medical knowledge; this check cannot tell
+which. MedHallu accuracy is therefore not a pure measure of checking an answer
+against its source, for any model.
+
+**Check 2, the LLMs asked Jev's question.** The question helps the LLMs too:
+GPT-5.6 Luna 95.1% (+2.2), Gemini 3.5 Flash Lite 95.0% (+1.5), Gemini 3.8 Flash
+94.8% (+7.6), Claude Haiku 4.5 92.4% (+0.4). With the same question, the first
+three are significantly more accurate than Jev's 92.9% (Holm p 0.012 to 0.016);
+Haiku is level. The earlier tie does not survive equal prompting.
+
+**Check 3, re-timing in one session.** The time gap holds: medians Jev 228 ms,
+Gemini 3.5 Flash Lite 703 ms (3.1 times), Claude Haiku 4.5 720 ms (3.2), GPT-5.6
+Luna 1,245 ms (5.4), Gemini 3.8 Flash 1,460 ms (6.4). Every model, Jev included,
+was a little slower than in the first runs.

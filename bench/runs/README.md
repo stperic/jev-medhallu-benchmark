@@ -12,8 +12,8 @@ edited.
 
 `code_sha256` in `meta.json` records the harness version each run used. Jev
 run 2, the four LLM rows and every run from the question search onward
-(`test-v2`, `dev-explore1`, `dev-explore2`, `dev2-*`, `dev-*-smoke`,
-`icd10/full-v1`) match `run_bench.py` and `common.py` as committed. Earlier runs
+(`test-v2`, the three follow-up checks, `dev-explore1`, `dev-explore2`, `dev2-*`,
+`dev-*-smoke`, `icd10/full-v1`) match `run_bench.py` and `common.py` as committed. Earlier runs
 (`test`, `test-repeat2`, `old-dev-sample/*`) used earlier working versions of
 the harness, before this repo had version control; those versions were not
 kept. `icd10/smoke` predates hash recording.
@@ -25,11 +25,16 @@ kept. `icd10/smoke` predates hash recording.
 | `medhallu/test` | **Jev run 1**: Jev asked a field-by-field mapping of MedHELM's LLM prompt (as a Noul, and as a Choice). 90.3% at threshold 0.85. |
 | `medhallu/test-v2` | **Jev run 2**: Jev asked the question chosen on dev (92.9% at threshold 0.65), **plus four current fast LLMs** added on 2026-09-22: GPT-5.6 Luna (reasoning none), Gemini 3.8 Flash (reasoning minimal), Gemini 3.5 Flash Lite, Claude Haiku 4.5. |
 | `medhallu/test-repeat2` | A 12-item repeat of Jev run 1, to check that Jev's answers are stable: probabilities moved by at most 0.03 (mean 0.006), no label changed. Same question as run 1, so no test information fed into run 2. |
+| `medhallu/test-nosource` | Follow-up check 1: the test items with the abstract replaced by "Not provided." (`data/items.test-nosource.jsonl`, from `datasets/medhallu/ablate_source.py`), Jev and the four LLMs. Shows how much each score depends on the source. |
+| `medhallu/test-llm-authors-question` | Follow-up check 2: the four LLMs asked Jev's run-2 question with Yes/No labels (`variants/llm-authors-question.task.json`). Scored with `--no-published`. |
+| `medhallu/timing-interleaved` | Follow-up check 3: all five models re-timed on the first 200 test items in one session, 10 rounds of 20 with the model order rotated each round (hence 50 invocations in `meta.json`). |
 
-The choices behind each test run were written down beforehand in
-`datasets/medhallu/PREREGISTRATION.md`.
+The choices behind each test run and follow-up check were written down
+beforehand in `datasets/medhallu/PREREGISTRATION.md`, which also reports the
+results. `uv run datasets/medhallu/followup_checks.py` prints the follow-up
+tables from these files.
 
-`predictions.csv` and `results.xlsx` for these two folders are not committed,
+`predictions.csv` and `results.xlsx` for `test` and `test-v2` are not committed,
 because they embed Stanford MedHELM's per-item predictions, which this repo does
 not re-host. Rebuild them (and the 13 Stanford columns) from `bench/`:
 

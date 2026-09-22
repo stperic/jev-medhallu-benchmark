@@ -22,6 +22,10 @@ bench/runs/medhallu/test/predictions.csv
 bench/runs/medhallu/test/results.xlsx
 bench/runs/medhallu/test-v2/predictions.csv
 bench/runs/medhallu/test-v2/results.xlsx
+bench/runs/medhallu/test-llm-authors-question/predictions.csv
+bench/runs/medhallu/test-llm-authors-question/results.xlsx
+bench/runs/medhallu/timing-interleaved/predictions.csv
+bench/runs/medhallu/timing-interleaved/results.xlsx
 
 # Local-only runs: a pre-change backup, an interrupted smoke run, run logs
 bench/runs/medhallu/_backup-*/

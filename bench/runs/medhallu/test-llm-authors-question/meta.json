@@ -1,0 +1,44 @@
+{
+  "created": "2026-09-22T14:44:54+00:00",
+  "task_fp": "2528ef1a864a2693",
+  "dataset": "medhallu",
+  "split": "test",
+  "task": "datasets/medhallu/variants/llm-authors-question.task.json",
+  "items": "datasets/medhallu/data/items.test.jsonl",
+  "items_sha256": "10e4a36157a9550e",
+  "jev_base_url": "https://openrouter.ai/api",
+  "runs": [
+    {
+      "at": "2026-09-22T14:44:54+00:00",
+      "models": [
+        "openai/gpt-5.6-luna@none",
+        "google/gemini-3.8-flash@minimal",
+        "google/gemini-3.5-flash-lite",
+        "anthropic/claude-haiku-4.5"
+      ],
+      "repeats": 1,
+      "concurrency": 4,
+      "providers": [
+        "openai/gpt-5.6-luna=openai",
+        "google/gemini-3.8-flash=google-ai-studio",
+        "google/gemini-3.5-flash-lite=google-ai-studio",
+        "anthropic/claude-haiku-4.5=anthropic"
+      ],
+      "max_tokens": 16000,
+      "filters": [],
+      "limit": null,
+      "warmup": 1,
+      "host": "redacted",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "code_sha256": {
+        "run_bench.py": "3ac3b3b7f895bc79",
+        "common.py": "e345b8202307ccb3"
+      },
+      "versions": {
+        "python": "3.12.10",
+        "typesafe-sdk": "0.7.1",
+        "httpx2": "2.13.0"
+      }
+    }
+  ]
+}

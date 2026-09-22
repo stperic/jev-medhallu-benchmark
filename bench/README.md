@@ -68,6 +68,11 @@ uv run score.py runs/medhallu/test --xlsx              # add --threshold T if de
   (plan in `PREREGISTRATION.md`, "Added LLM rows"): Gemini 3.5 Flash Lite 93.5%,
   GPT-5.6 Luna (reasoning none) 92.9%, Claude Haiku 4.5 92.0%, Gemini 3.8 Flash
   (reasoning minimal) 87.2%. The same re-score command above includes them.
+- Three follow-up checks after an external critique (planned and reported in
+  `PREREGISTRATION.md`; tables with `uv run datasets/medhallu/followup_checks.py`):
+  asked Jev's question, three of the four LLMs beat Jev by about 2 points;
+  without the abstract every model still scores 66% to 83%; a same-session
+  re-timing confirmed Jev is 3 to 6 times faster.
 - `jev_questions` in `task.json` (optional) replaces the main question for Jev
   only: one or more Nouls asked in a single request, combined by `jev_combine`
   (`mean`, `max` or logistic weights). Each answer is stored per item under

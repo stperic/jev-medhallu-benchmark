@@ -1,0 +1,17 @@
+{
+  "name": "medhallu",
+  "source": "MedHELM v4.0.0 medhallu (gs://crfm-helm-public/medhelm) over hf://datasets/UTAustin-AIHealth/MedHallu",
+  "published_source": "Stanford CRFM, MedHELM v4.0.0",
+  "type": "noul",
+  "instructions": "Would the authors of the study described in `knowledge` say that `answer` misrepresents their findings?",
+  "labels": {
+    "1": "Yes",
+    "0": "No"
+  },
+  "positive": "1",
+  "slice_fields": [
+    "gold",
+    "difficulty",
+    "category"
+  ]
+}
