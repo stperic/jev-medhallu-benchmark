@@ -236,3 +236,35 @@ Haiku is level. The earlier tie does not survive equal prompting.
 Gemini 3.5 Flash Lite 703 ms (3.1 times), Claude Haiku 4.5 720 ms (3.2), GPT-5.6
 Luna 1,245 ms (5.4), Gemini 3.8 Flash 1,460 ms (6.4). Every model, Jev included,
 was a little slower than in the first runs.
+
+# Check 4: Jev first, an LLM for the uncertain rest. Choices fixed before computing
+
+Written 2026-09-22, after checks 1 to 3 and before this analysis. It uses
+existing run files only: no new model calls.
+
+**Question.** Checks 2 and 3 show fast LLMs about 2 points more accurate than
+Jev, and Jev 3 to 6 times faster. Can a two-step check keep most of the
+accuracy of the LLM at a fraction of its time and cost?
+
+- **Rule:** Jev answers first (run 2, `runs/medhallu/test-v2/jev-1.13.jsonl`).
+  If Jev's probability of "hallucinated" is at least 0.9, the answer is
+  hallucinated; if it is at most 0.1, faithful. Otherwise the item goes to the
+  LLM, whose answer is taken from `runs/medhallu/test-llm-authors-question`
+  (Jev's question, check 2).
+- **Why 0.9.** A round number, not tuned on dev. It is one of the three levels
+  `score.py` prints by default, and its test figures were already visible in
+  `test-v2/summary.md` (37.2% of items, 99.5% accurate) when it was chosen.
+  Other bands (0.05 to 0.30 each side) are reported as exploratory only.
+- **LLMs:** all four, each as its own cascade. The post may feature GPT-5.6
+  Luna (the most accurate alone with Jev's question) and Gemini 3.5 Flash Lite
+  (the fastest); both were picked from results already known, before the
+  cascade was computed.
+- **Reported:** accuracy with a 95% Wilson interval; share of items sent to the
+  LLM; paired exact McNemar against the LLM alone and against Jev alone
+  (Holm-corrected within each family of four); cost per 1,000 checks (Jev's
+  billed cost on every item plus the LLM's billed cost on the items sent to
+  it); time per check (Jev's time plus, for items sent on, the LLM's time).
+  Times come from the runs timed one request at a time: Jev from `test-v2`, and
+  each LLM from its `test-v2` row on the same item (the MedHELM-style prompt,
+  since the check-2 runs were not timed one request at a time). Mean, median
+  and 95th percentile.
