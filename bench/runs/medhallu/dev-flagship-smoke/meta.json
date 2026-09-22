@@ -1,0 +1,42 @@
+{
+  "created": "2026-09-22T12:16:10+00:00",
+  "task_fp": "4a9efe880df4b922",
+  "dataset": "medhallu",
+  "split": "dev",
+  "task": "datasets/medhallu/data/task.json",
+  "items": "datasets/medhallu/data/items.dev.jsonl",
+  "items_sha256": "ebd0a02d0edc604c",
+  "jev_base_url": "https://openrouter.ai/api",
+  "runs": [
+    {
+      "at": "2026-09-22T12:16:10+00:00",
+      "models": [
+        "anthropic/claude-fable-5.1",
+        "openai/gpt-6-astra",
+        "google/gemini-3.1-pro-preview"
+      ],
+      "repeats": 1,
+      "concurrency": 1,
+      "providers": [
+        "anthropic/claude-fable-5.1=anthropic",
+        "openai/gpt-6-astra=openai",
+        "google/gemini-3.1-pro-preview=google-ai-studio"
+      ],
+      "max_tokens": 16000,
+      "filters": [],
+      "limit": 5,
+      "warmup": 1,
+      "host": "redacted",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "code_sha256": {
+        "run_bench.py": "3ac3b3b7f895bc79",
+        "common.py": "e345b8202307ccb3"
+      },
+      "versions": {
+        "python": "3.12.10",
+        "typesafe-sdk": "0.7.1",
+        "httpx2": "2.13.0"
+      }
+    }
+  ]
+}

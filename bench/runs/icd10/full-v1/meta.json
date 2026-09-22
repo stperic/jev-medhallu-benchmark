@@ -1,0 +1,71 @@
+{
+  "created": "2026-09-21T18:57:03+00:00",
+  "task_fp": "55a14a4e03748645",
+  "dataset": "icd10",
+  "split": null,
+  "task": "datasets/icd10/data/task.json",
+  "items": "datasets/icd10/data/items.jsonl",
+  "items_sha256": "abbfda2fefa8ae39",
+  "jev_base_url": "https://openrouter.ai/api",
+  "runs": [
+    {
+      "at": "2026-09-21T18:57:03+00:00",
+      "models": [
+        "jev-1.13",
+        "stringmatch",
+        "google/gemini-3.8-flash",
+        "deepseek/deepseek-v4.1-flash"
+      ],
+      "repeats": 1,
+      "concurrency": 1,
+      "providers": [
+        "google/gemini-3.8-flash=google-ai-studio",
+        "deepseek/deepseek-v4.1-flash=deepseek"
+      ],
+      "max_tokens": 16000,
+      "filters": [],
+      "limit": null,
+      "warmup": 1,
+      "host": "redacted",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "code_sha256": {
+        "run_bench.py": "3ac3b3b7f895bc79",
+        "common.py": "e345b8202307ccb3"
+      },
+      "versions": {
+        "python": "3.12.10",
+        "typesafe-sdk": "0.7.1",
+        "httpx2": "2.13.0"
+      }
+    },
+    {
+      "at": "2026-09-21T18:59:56+00:00",
+      "models": [
+        "jev-1.13",
+        "stringmatch",
+        "google/gemini-3.8-flash",
+        "deepseek/deepseek-v4.1-flash"
+      ],
+      "repeats": 1,
+      "concurrency": 1,
+      "providers": [
+        "google/gemini-3.8-flash=google-ai-studio"
+      ],
+      "max_tokens": 16000,
+      "filters": [],
+      "limit": null,
+      "warmup": 1,
+      "host": "redacted",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "code_sha256": {
+        "run_bench.py": "3ac3b3b7f895bc79",
+        "common.py": "e345b8202307ccb3"
+      },
+      "versions": {
+        "python": "3.12.10",
+        "typesafe-sdk": "0.7.1",
+        "httpx2": "2.13.0"
+      }
+    }
+  ]
+}

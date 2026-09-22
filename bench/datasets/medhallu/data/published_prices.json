@@ -1,0 +1,93 @@
+{
+  "anthropic_claude-3-5-sonnet-20241022": {
+    "litellm_key": "claude-3-5-sonnet-20241022",
+    "sheet": "v1.60.0",
+    "input_per_m": 3.0,
+    "output_per_m": 15.0,
+    "reasoning_model": false
+  },
+  "anthropic_claude-3-7-sonnet-20250219": {
+    "litellm_key": "claude-3-7-sonnet-20250219",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 3.0,
+    "output_per_m": 15.0,
+    "reasoning_model": false
+  },
+  "google_gemini-1.5-pro-001": {
+    "litellm_key": "gemini-1.5-pro-001",
+    "sheet": "v1.60.0",
+    "input_per_m": 1.25,
+    "output_per_m": 5.0,
+    "reasoning_model": false
+  },
+  "google_gemini-2.0-flash-001": {
+    "litellm_key": "gemini-2.0-flash-001",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 0.15,
+    "output_per_m": 0.6,
+    "reasoning_model": false
+  },
+  "google_gemini-2.5-pro-preview-05-06": {
+    "litellm_key": "gemini-2.5-pro",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 1.25,
+    "output_per_m": 10.0,
+    "reasoning_model": true
+  },
+  "meta_llama-3.3-70b-instruct": {
+    "litellm_key": "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 0.1,
+    "output_per_m": 0.32,
+    "reasoning_model": false
+  },
+  "openai_gpt-4o-2024-05-13": {
+    "litellm_key": "gpt-4o-2024-05-13",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 5.0,
+    "output_per_m": 15.0,
+    "reasoning_model": false
+  },
+  "openai_gpt-4o-mini-2024-07-18": {
+    "litellm_key": "gpt-4o-mini-2024-07-18",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 0.15,
+    "output_per_m": 0.6,
+    "reasoning_model": false
+  },
+  "deepseek-ai_deepseek-r1": {
+    "litellm_key": "deepseek/deepseek-r1",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 0.55,
+    "output_per_m": 2.19,
+    "reasoning_model": true
+  },
+  "openai_gpt-5-2025-08-07": {
+    "litellm_key": "gpt-5-2025-08-07",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 1.25,
+    "output_per_m": 10.0,
+    "reasoning_model": true
+  },
+  "openai_gpt-5-mini-2025-08-07": {
+    "litellm_key": "gpt-5-mini-2025-08-07",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 0.25,
+    "output_per_m": 2.0,
+    "reasoning_model": true
+  },
+  "openai_o3-mini-2025-01-31": {
+    "litellm_key": "o3-mini-2025-01-31",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 1.1,
+    "output_per_m": 4.4,
+    "reasoning_model": true
+  },
+  "openai_o4-mini-2025-04-16": {
+    "litellm_key": "o4-mini-2025-04-16",
+    "sheet": "main@2026-09-21",
+    "input_per_m": 1.1,
+    "output_per_m": 4.4,
+    "reasoning_model": true
+  }
+}

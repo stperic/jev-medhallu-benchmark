@@ -1,0 +1,36 @@
+{
+  "created": "2026-09-21T17:28:00+00:00",
+  "task_fp": "28b9f035820a81e3",
+  "dataset": null,
+  "split": null,
+  "task": "datasets/medhallu/variants/explore2.json",
+  "items": "datasets/medhallu/data/items.dev.jsonl",
+  "items_sha256": "ebd0a02d0edc604c",
+  "jev_base_url": "https://openrouter.ai/api",
+  "runs": [
+    {
+      "at": "2026-09-21T17:28:00+00:00",
+      "models": [
+        "jev-1.13"
+      ],
+      "repeats": 1,
+      "concurrency": 8,
+      "providers": [],
+      "max_tokens": 16000,
+      "filters": [],
+      "limit": null,
+      "warmup": 1,
+      "host": "redacted",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "code_sha256": {
+        "run_bench.py": "3ac3b3b7f895bc79",
+        "common.py": "e345b8202307ccb3"
+      },
+      "versions": {
+        "python": "3.12.10",
+        "typesafe-sdk": "0.7.1",
+        "httpx2": "2.13.0"
+      }
+    }
+  ]
+}

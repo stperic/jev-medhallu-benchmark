@@ -1,0 +1,106 @@
+{"id": "A00_en", "text": "Patient diagnosed with Cholera. Assessment and plan documented.", "gold": "A00", "lang": "en", "kind": "templated"}
+{"id": "A09_en", "text": "Patient presents with acute diarrhea and vomiting x2 days. No blood in stool. Mild dehydration. VS stable. Dx: Viral gastroenteritis. Plan: ORS, symptomatic Tx.", "gold": "A09", "lang": "en", "kind": "clinical"}
+{"id": "A15_en", "text": "Patient diagnosed with Respiratory tuberculosis. Assessment and plan documented.", "gold": "A15", "lang": "en", "kind": "templated"}
+{"id": "A41_en", "text": "Fever 39.5°C, tachycardia, hypotension. Suspected UTI source. Blood cx drawn. Started broad-spectrum abx. ICU consult.", "gold": "A41", "lang": "en", "kind": "clinical"}
+{"id": "B20_en", "text": "Patient diagnosed with HIV disease. Assessment and plan documented.", "gold": "B20", "lang": "en", "kind": "templated"}
+{"id": "C18_en", "text": "Patient diagnosed with Malignant neoplasm of colon. Assessment and plan documented.", "gold": "C18", "lang": "en", "kind": "templated"}
+{"id": "C34_en", "text": "CT chest: 4cm RUL mass with mediastinal LAD. Biopsy scheduled. Staging initiated. Oncology referral.", "gold": "C34", "lang": "en", "kind": "clinical"}
+{"id": "C50_en", "text": "Mammography: suspicious 2cm lesion L breast. Core biopsy done - awaiting path. MDT planned.", "gold": "C50", "lang": "en", "kind": "clinical"}
+{"id": "C61_en", "text": "Patient diagnosed with Malignant neoplasm of prostate. Assessment and plan documented.", "gold": "C61", "lang": "en", "kind": "templated"}
+{"id": "D50_en", "text": "Hb 95, MCV 72, ferritin 8. Menorrhagia reported. Started iron supplementation. GYN referral.", "gold": "D50", "lang": "en", "kind": "clinical"}
+{"id": "E03_en", "text": "Patient diagnosed with Hypothyroidism. Assessment and plan documented.", "gold": "E03", "lang": "en", "kind": "templated"}
+{"id": "E10_en", "text": "New onset T1DM. DKA on presentation. Insulin started. Diabetes education initiated. Endo f/u arranged.", "gold": "E10", "lang": "en", "kind": "clinical"}
+{"id": "E11_en", "text": "HbA1c 58. FBG 8.2. BMI 31. Diet/exercise counseling. Started metformin 500mg bid. Annual eye/foot exam ordered.", "gold": "E11", "lang": "en", "kind": "clinical"}
+{"id": "E66_en", "text": "BMI 38. Weight 115kg. Discussed lifestyle modifications, diet, exercise. Consider GLP-1 agonist. Dietitian referral.", "gold": "E66", "lang": "en", "kind": "clinical"}
+{"id": "E78_en", "text": "Patient diagnosed with Disorders of lipoprotein metabolism. Assessment and plan documented.", "gold": "E78", "lang": "en", "kind": "templated"}
+{"id": "F10_en", "text": "Patient diagnosed with Alcohol related disorders. Assessment and plan documented.", "gold": "F10", "lang": "en", "kind": "templated"}
+{"id": "F32_en", "text": "PHQ-9: 15. Sleep disturbance, anhedonia, poor concentration x6wks. No SI. Started SSRI. Psychotherapy referral. F/u 2wks.", "gold": "F32", "lang": "en", "kind": "clinical"}
+{"id": "F33_en", "text": "Patient diagnosed with Recurrent depressive disorder. Assessment and plan documented.", "gold": "F33", "lang": "en", "kind": "templated"}
+{"id": "F41_en", "text": "GAD-7: 14. Persistent worry, restlessness x6mo. No panic. CBT recommended. SSRI discussed - patient prefers therapy first.", "gold": "F41", "lang": "en", "kind": "clinical"}
+{"id": "G20_en", "text": "Patient diagnosed with Parkinson disease. Assessment and plan documented.", "gold": "G20", "lang": "en", "kind": "templated"}
+{"id": "G30_en", "text": "Patient diagnosed with Alzheimer disease. Assessment and plan documented.", "gold": "G30", "lang": "en", "kind": "templated"}
+{"id": "G35_en", "text": "Patient diagnosed with Multiple sclerosis. Assessment and plan documented.", "gold": "G35", "lang": "en", "kind": "templated"}
+{"id": "G40_en", "text": "Patient diagnosed with Epilepsy. Assessment and plan documented.", "gold": "G40", "lang": "en", "kind": "templated"}
+{"id": "G43_en", "text": "Recurrent unilateral throbbing HA with N/V, photophobia. 4-5/month. Triggers: stress, sleep. Sumatriptan PRN. HA diary.", "gold": "G43", "lang": "en", "kind": "clinical"}
+{"id": "I10_en", "text": "BP 158/96 x3 readings. No end-organ damage. BMI 28. Lifestyle: DASH diet, exercise, Na restriction. Started ACEi. Home BP monitoring.", "gold": "I10", "lang": "en", "kind": "clinical"}
+{"id": "I20_en", "text": "Patient diagnosed with Angina pectoris. Assessment and plan documented.", "gold": "I20", "lang": "en", "kind": "templated"}
+{"id": "I21_en", "text": "Acute CP, diaphoresis. ECG: STE V1-V4. Troponin elevated. STEMI protocol. ASA, heparin, clopidogrel. Emergent PCI.", "gold": "I21", "lang": "en", "kind": "clinical"}
+{"id": "I25_en", "text": "Patient diagnosed with Chronic ischemic heart disease. Assessment and plan documented.", "gold": "I25", "lang": "en", "kind": "templated"}
+{"id": "I48_en", "text": "Persistent AF. CHA2DS2-VASc 3. Started DOAC. Rate control with BB. Echo: normal LV function.", "gold": "I48", "lang": "en", "kind": "clinical"}
+{"id": "I50_en", "text": "NYHA II. Echo: EF 35%, dilated LV. BNP 450. On ACEi, BB, diuretic, MRA. ICD evaluation referred.", "gold": "I50", "lang": "en", "kind": "clinical"}
+{"id": "I63_en", "text": "Acute L hemiparesis, facial droop. CT: R MCA infarct. tPA given. Stroke unit admission. Secondary prevention started.", "gold": "I63", "lang": "en", "kind": "clinical"}
+{"id": "J06_en", "text": "3d rhinorrhea, sore throat, mild cough. Afebrile. Lungs clear. Viral URI. Symptomatic Tx. Return if worse.", "gold": "J06", "lang": "en", "kind": "clinical"}
+{"id": "J18_en", "text": "Productive cough, fever 38.8°C, dyspnea. CXR: RLL consolidation. CRP 120. Amoxicillin started. F/u 48h.", "gold": "J18", "lang": "en", "kind": "clinical"}
+{"id": "J44_en", "text": "COPD GOLD III. Increased dyspnea, purulent sputum. SpO2 88% RA. ABG: resp acidosis. Admitted. Steroids, bronchodilators, abx. NIV.", "gold": "J44", "lang": "en", "kind": "clinical"}
+{"id": "J45_en", "text": "Intermittent wheeze, nocturnal cough. PEF variability >20%. Spirometry: reversible obstruction. ICS/LABA started. Asthma action plan.", "gold": "J45", "lang": "en", "kind": "clinical"}
+{"id": "K21_en", "text": "Heartburn, regurgitation x3mo. Gastroscopy: LA grade B esophagitis. H.pylori neg. PPI started. Lifestyle advice. F/u scope 8wks.", "gold": "K21", "lang": "en", "kind": "clinical"}
+{"id": "K29_en", "text": "Patient diagnosed with Gastritis and duodenitis. Assessment and plan documented.", "gold": "K29", "lang": "en", "kind": "templated"}
+{"id": "K80_en", "text": "Patient diagnosed with Cholelithiasis. Assessment and plan documented.", "gold": "K80", "lang": "en", "kind": "templated"}
+{"id": "M17_en", "text": "Progressive knee pain, worse with activity. XR: JSN, osteophytes. Weight loss advised. Paracetamol. PT for quads. Consider injection.", "gold": "M17", "lang": "en", "kind": "clinical"}
+{"id": "M54_en", "text": "Mechanical LBP x2wks, no radiculopathy. No red flags. ROM limited. NSAIDs. PT referral. Activity as tolerated.", "gold": "M54", "lang": "en", "kind": "clinical"}
+{"id": "M81_en", "text": "Patient diagnosed with Osteoporosis without pathological fracture. Assessment and plan documented.", "gold": "M81", "lang": "en", "kind": "templated"}
+{"id": "N18_en", "text": "eGFR 42. Proteinuria 0.5g/d. BP controlled on ACEi. DM controlled. Avoid nephrotoxins. Annual uACR/eGFR. Nephro referral if decline.", "gold": "N18", "lang": "en", "kind": "clinical"}
+{"id": "N39_en", "text": "Dysuria, frequency, urgency. No fever/flank pain. Dipstick: nitrite+, WBC++. Uncomplicated cystitis. Nitrofurantoin x3d.", "gold": "N39", "lang": "en", "kind": "clinical"}
+{"id": "O24_en", "text": "Patient diagnosed with Diabetes mellitus in pregnancy. Assessment and plan documented.", "gold": "O24", "lang": "en", "kind": "templated"}
+{"id": "R05_en", "text": "Persistent dry cough x4wks. Non-smoker. No dyspnea. CXR normal. Likely post-viral. Trial antihistamine. PPI if no improvement.", "gold": "R05", "lang": "en", "kind": "clinical"}
+{"id": "R10_en", "text": "Patient diagnosed with Abdominal and pelvic pain. Assessment and plan documented.", "gold": "R10", "lang": "en", "kind": "templated"}
+{"id": "R51_en", "text": "Tension-type HA, bilateral, pressing. No red flags. Occasional paracetamol. Stress, poor sleep. Lifestyle advice. HA diary.", "gold": "R51", "lang": "en", "kind": "clinical"}
+{"id": "R53_en", "text": "Patient diagnosed with Malaise and fatigue. Assessment and plan documented.", "gold": "R53", "lang": "en", "kind": "templated"}
+{"id": "S06_en", "text": "Patient diagnosed with Intracranial injury. Assessment and plan documented.", "gold": "S06", "lang": "en", "kind": "templated"}
+{"id": "S52_en", "text": "FOOSH injury. XR: distal radius fx, minimal displacement. Closed reduction. Cast applied. Elevation, ice. Ortho f/u 1wk.", "gold": "S52", "lang": "en", "kind": "clinical"}
+{"id": "S72_en", "text": "Fall from standing. Hip pain, shortened ext rotated leg. XR: intertrochanteric fx. Ortho consult. Surgical fixation planned.", "gold": "S72", "lang": "en", "kind": "clinical"}
+{"id": "Z00_en", "text": "Patient diagnosed with General examination and investigation. Assessment and plan documented.", "gold": "Z00", "lang": "en", "kind": "templated"}
+{"id": "Z23_en", "text": "Patient diagnosed with Encounter for immunization. Assessment and plan documented.", "gold": "Z23", "lang": "en", "kind": "templated"}
+{"id": "A00_sv", "text": "Patient diagnosticerad med Kolera. Bedömning och plan dokumenterade.", "gold": "A00", "lang": "sv", "kind": "templated"}
+{"id": "A09_sv", "text": "Pat inkommer med akut diarré och kräkningar x2 dagar. Inget blod i avföring. Lätt dehydrerad. Vitalpar stabila. Diagnos: Viral gastroenterit. Plan: ORS, symtomatisk beh.", "gold": "A09", "lang": "sv", "kind": "clinical"}
+{"id": "A15_sv", "text": "Patient diagnosticerad med Lungtuberkulos. Bedömning och plan dokumenterade.", "gold": "A15", "lang": "sv", "kind": "templated"}
+{"id": "A41_sv", "text": "Feber 39,5°C, takykardi, hypotension. Misstänkt UVI-fokus. Blododlingar tagna. Bredspektrumantibiotika insatt. IVA-konsult.", "gold": "A41", "lang": "sv", "kind": "clinical"}
+{"id": "B20_sv", "text": "Patient diagnosticerad med HIV-sjukdom. Bedömning och plan dokumenterade.", "gold": "B20", "lang": "sv", "kind": "templated"}
+{"id": "C18_sv", "text": "Patient diagnosticerad med Malign tumör i kolon. Bedömning och plan dokumenterade.", "gold": "C18", "lang": "sv", "kind": "templated"}
+{"id": "C34_sv", "text": "DT thorax: 4cm tumör höger överlob med mediastinal lymfadenopati. Biopsi planerad. Stadieindelning påbörjad. Onkologremiss.", "gold": "C34", "lang": "sv", "kind": "clinical"}
+{"id": "C50_sv", "text": "Mammografi: suspekt 2cm förändring vä bröst. Mellannålsbiopsi utförd - inväntar PAD. MDT planerad.", "gold": "C50", "lang": "sv", "kind": "clinical"}
+{"id": "C61_sv", "text": "Patient diagnosticerad med Malign tumör i prostata. Bedömning och plan dokumenterade.", "gold": "C61", "lang": "sv", "kind": "templated"}
+{"id": "D50_sv", "text": "Hb 95, MCV 72, ferritin 8. Menorragi. Järntillskott insatt. GYN-remiss.", "gold": "D50", "lang": "sv", "kind": "clinical"}
+{"id": "E03_sv", "text": "Patient diagnosticerad med Hypotyreos. Bedömning och plan dokumenterade.", "gold": "E03", "lang": "sv", "kind": "templated"}
+{"id": "E10_sv", "text": "Nydebuterad T1DM. DKA vid ankomst. Insulin insatt. Diabetesutbildning påbörjad. Endokrinuppföljning planerad.", "gold": "E10", "lang": "sv", "kind": "clinical"}
+{"id": "E11_sv", "text": "HbA1c 58. F-glukos 8,2. BMI 31. Kost/motionsråd. Metformin 500mg x2 insatt. Årlig ögon-/fotundersökning beställd.", "gold": "E11", "lang": "sv", "kind": "clinical"}
+{"id": "E66_sv", "text": "BMI 38. Vikt 115kg. Livsstilsförändringar diskuterade, kost, motion. Överväg GLP-1-agonist. Dietistremiss.", "gold": "E66", "lang": "sv", "kind": "clinical"}
+{"id": "E78_sv", "text": "Patient diagnosticerad med Störningar i lipoproteinmetabolismen. Bedömning och plan dokumenterade.", "gold": "E78", "lang": "sv", "kind": "templated"}
+{"id": "F10_sv", "text": "Patient diagnosticerad med Alkoholrelaterade störningar. Bedömning och plan dokumenterade.", "gold": "F10", "lang": "sv", "kind": "templated"}
+{"id": "F32_sv", "text": "PHQ-9: 15. Sömnstörning, anhedoni, koncentrationssvårigheter x6v. Ingen suicidalitet. SSRI insatt. Psykoterapiremiss. Återbesök 2v.", "gold": "F32", "lang": "sv", "kind": "clinical"}
+{"id": "F33_sv", "text": "Patient diagnosticerad med Recidiverande depression. Bedömning och plan dokumenterade.", "gold": "F33", "lang": "sv", "kind": "templated"}
+{"id": "F41_sv", "text": "GAD-7: 14. Ihållande oro, rastlöshet x6mån. Inga panikattacker. KBT rekommenderat. SSRI diskuterat - pat föredrar terapi först.", "gold": "F41", "lang": "sv", "kind": "clinical"}
+{"id": "G20_sv", "text": "Patient diagnosticerad med Parkinsons sjukdom. Bedömning och plan dokumenterade.", "gold": "G20", "lang": "sv", "kind": "templated"}
+{"id": "G30_sv", "text": "Patient diagnosticerad med Alzheimers sjukdom. Bedömning och plan dokumenterade.", "gold": "G30", "lang": "sv", "kind": "templated"}
+{"id": "G35_sv", "text": "Patient diagnosticerad med Multipel skleros. Bedömning och plan dokumenterade.", "gold": "G35", "lang": "sv", "kind": "templated"}
+{"id": "G40_sv", "text": "Patient diagnosticerad med Epilepsi. Bedömning och plan dokumenterade.", "gold": "G40", "lang": "sv", "kind": "templated"}
+{"id": "G43_sv", "text": "Återkommande ensidig pulserande huvudvärk med illamående, ljuskänslighet. 4-5/mån. Triggers: stress, sömn. Sumatriptan vb. Huvudvärksdagbok.", "gold": "G43", "lang": "sv", "kind": "clinical"}
+{"id": "I10_sv", "text": "BT 158/96 x3 mätningar. Inga organskador. BMI 28. Livsstil: DASH-diet, motion, saltrestriktion. ACE-hämmare insatt. Hemblodtrycksmätning.", "gold": "I10", "lang": "sv", "kind": "clinical"}
+{"id": "I20_sv", "text": "Patient diagnosticerad med Angina pectoris. Bedömning och plan dokumenterade.", "gold": "I20", "lang": "sv", "kind": "templated"}
+{"id": "I21_sv", "text": "Akut bröstsmärta, svettning. EKG: ST-höjning V1-V4. Troponin förhöjt. STEMI-protokoll. ASA, heparin, klopidogrel. Akut PCI.", "gold": "I21", "lang": "sv", "kind": "clinical"}
+{"id": "I25_sv", "text": "Patient diagnosticerad med Kronisk ischemisk hjärtsjukdom. Bedömning och plan dokumenterade.", "gold": "I25", "lang": "sv", "kind": "templated"}
+{"id": "I48_sv", "text": "Persisterande FF. CHA2DS2-VASc 3. NOAK insatt. Frekvensreglering med BB. Eko: normal VK-funktion.", "gold": "I48", "lang": "sv", "kind": "clinical"}
+{"id": "I50_sv", "text": "NYHA II. Eko: EF 35%, dilaterad VK. BNP 450. ACE-hämmare, BB, diuretika, MRA. ICD-bedömning remitterad.", "gold": "I50", "lang": "sv", "kind": "clinical"}
+{"id": "I63_sv", "text": "Akut vä hemipares, facialispares. DT: hö MCA-infarkt. tPA givet. Strokeenhet. Sekundärprofylax insatt.", "gold": "I63", "lang": "sv", "kind": "clinical"}
+{"id": "J06_sv", "text": "3d snuva, halsont, lätt hosta. Afebril. Lungor ua. Viral ÖLI. Symtomatisk beh. Återkom vid försämring.", "gold": "J06", "lang": "sv", "kind": "clinical"}
+{"id": "J18_sv", "text": "Produktiv hosta, feber 38,8°C, dyspné. Lungrtg: hö nedre lobsinfiltrat. CRP 120. Amoxicillin insatt. Återbesök 48h.", "gold": "J18", "lang": "sv", "kind": "clinical"}
+{"id": "J44_sv", "text": "KOL GOLD III. Ökad dyspné, purulent sputum. SpO2 88%. Blodgas: resp acidos. Inlagd. Steroider, bronkdilaterare, abx. NIV.", "gold": "J44", "lang": "sv", "kind": "clinical"}
+{"id": "J45_sv", "text": "Intermittenta väsljud, nattlig hosta. PEF-variabilitet >20%. Spirometri: reversibel obstruktion. ICS/LABA insatt. Astmaplan.", "gold": "J45", "lang": "sv", "kind": "clinical"}
+{"id": "K21_sv", "text": "Halsbränna, regurgitation x3mån. Gastroskopi: LA grad B esofagit. H.pylori neg. PPI insatt. Livsstilsråd. Kontrollskopi 8v.", "gold": "K21", "lang": "sv", "kind": "clinical"}
+{"id": "K29_sv", "text": "Patient diagnosticerad med Gastrit och duodenit. Bedömning och plan dokumenterade.", "gold": "K29", "lang": "sv", "kind": "templated"}
+{"id": "K80_sv", "text": "Patient diagnosticerad med Gallstenssjukdom. Bedömning och plan dokumenterade.", "gold": "K80", "lang": "sv", "kind": "templated"}
+{"id": "M17_sv", "text": "Tilltagande knäsmärta, värre vid aktivitet. Rtg: ledspringesänkning, osteofyter. Viktnedgång. Paracetamol. FT för quadriceps. Överväg injektion.", "gold": "M17", "lang": "sv", "kind": "clinical"}
+{"id": "M54_sv", "text": "Mekanisk ländryggssmärta x2v, ingen radikulopati. Inga röda flaggor. Rörelseomfång begränsat. NSAID. FT-remiss. Aktivitet efter förmåga.", "gold": "M54", "lang": "sv", "kind": "clinical"}
+{"id": "M81_sv", "text": "Patient diagnosticerad med Osteoporos utan patologisk fraktur. Bedömning och plan dokumenterade.", "gold": "M81", "lang": "sv", "kind": "templated"}
+{"id": "N18_sv", "text": "eGFR 42. Proteinuri 0,5g/d. BT kontrollerat på ACE-hämmare. DM välkontrollerad. Undvik nefrotoxiner. Årlig uACR/eGFR. Njurmed-remiss vid försämring.", "gold": "N18", "lang": "sv", "kind": "clinical"}
+{"id": "N39_sv", "text": "Dysuri, täta trängningar. Ingen feber/flanksmärta. Urinsticka: nitrit+, LPK++. Okomplicerad cystit. Nitrofurantoin x3d.", "gold": "N39", "lang": "sv", "kind": "clinical"}
+{"id": "O24_sv", "text": "Patient diagnosticerad med Diabetes mellitus vid graviditet. Bedömning och plan dokumenterade.", "gold": "O24", "lang": "sv", "kind": "templated"}
+{"id": "R05_sv", "text": "Ihållande torrhosta x4v. Icke-rökare. Ingen dyspné. Lungrtg normal. Troligen postviral. Pröva antihistamin. PPI om ingen förbättring.", "gold": "R05", "lang": "sv", "kind": "clinical"}
+{"id": "R10_sv", "text": "Patient diagnosticerad med Buk- och bäckensmärta. Bedömning och plan dokumenterade.", "gold": "R10", "lang": "sv", "kind": "templated"}
+{"id": "R51_sv", "text": "Spänningshuvudvärk, bilateral, tryckande. Inga röda flaggor. Sporadisk paracetamol. Stress, dålig sömn. Livsstilsråd. Huvudvärksdagbok.", "gold": "R51", "lang": "sv", "kind": "clinical"}
+{"id": "R53_sv", "text": "Patient diagnosticerad med Sjukdomskänsla och trötthet. Bedömning och plan dokumenterade.", "gold": "R53", "lang": "sv", "kind": "templated"}
+{"id": "S06_sv", "text": "Patient diagnosticerad med Intrakraniell skada. Bedömning och plan dokumenterade.", "gold": "S06", "lang": "sv", "kind": "templated"}
+{"id": "S52_sv", "text": "FOOSH-skada. Rtg: distal radiusfraktur, minimal felställning. Sluten reposition. Gips. Högläge, is. Ortoped 1v.", "gold": "S52", "lang": "sv", "kind": "clinical"}
+{"id": "S72_sv", "text": "Fall från stående. Höftsmärta, förkortat utåtroterat ben. Rtg: intertrokantär fraktur. Ortopedkonsult. Kirurgisk fixation planerad.", "gold": "S72", "lang": "sv", "kind": "clinical"}
+{"id": "Z00_sv", "text": "Patient diagnosticerad med Allmän undersökning och utredning. Bedömning och plan dokumenterade.", "gold": "Z00", "lang": "sv", "kind": "templated"}
+{"id": "Z23_sv", "text": "Patient diagnosticerad med Kontakt för vaccination. Bedömning och plan dokumenterade.", "gold": "Z23", "lang": "sv", "kind": "templated"}

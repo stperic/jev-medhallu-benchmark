@@ -1,0 +1,29 @@
+# Secrets: copy bench/.env.example to bench/.env and add your key
+.env
+.env.*
+!.env.example
+
+# Python and OS clutter
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# Draft blog post, published separately once final
+post/
+
+# Stanford MedHELM's per-item predictions: not re-hosted here.
+# `uv run datasets/medhallu/prepare.py` downloads them from Stanford's public bucket.
+bench/datasets/medhallu/data/published/
+
+# Derived files of the test runs, which embed Stanford's per-item predictions.
+# Regenerate with score.py after prepare.py (see bench/runs/README.md).
+bench/runs/medhallu/test/predictions.csv
+bench/runs/medhallu/test/results.xlsx
+bench/runs/medhallu/test-v2/predictions.csv
+bench/runs/medhallu/test-v2/results.xlsx
+
+# Local-only runs: a pre-change backup, an interrupted smoke run, run logs
+bench/runs/medhallu/_backup-*/
+bench/runs/medhallu/dev-frontier-smoke/
+bench/runs/**/*.log

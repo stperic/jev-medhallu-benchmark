@@ -1,0 +1,6 @@
+id,lang,kind,gold,gold_name,text,jev-1.13 pred,jev-1.13 correct,jev-1.13 confidence,jev-1.13 latency_ms,jev-1.13 error,anthropic/claude-opus-5@low pred,anthropic/claude-opus-5@low correct,anthropic/claude-opus-5@low confidence,anthropic/claude-opus-5@low latency_ms,anthropic/claude-opus-5@low error,stringmatch pred,stringmatch correct,stringmatch confidence,stringmatch latency_ms,stringmatch error
+A00_en,en,templated,A00,Cholera,Patient diagnosed with Cholera. Assessment and plan documented.,A00,1,1.0,246,,A00,1,,2388,,A00,1,,0,
+A09_en,en,clinical,A09,Infectious gastroenteritis and colitis,"Patient presents with acute diarrhea and vomiting x2 days. No blood in stool. Mild dehydration. VS stable. Dx: Viral gastroenteritis. Plan: ORS, symptomatic Tx.",A09,1,1.0,197,,A09,1,,2011,,,0,,0,
+A15_en,en,templated,A15,Respiratory tuberculosis,Patient diagnosed with Respiratory tuberculosis. Assessment and plan documented.,A15,1,1.0,204,,A15,1,,1733,,A15,1,,0,
+A41_en,en,clinical,A41,Other sepsis,"Fever 39.5°C, tachycardia, hypotension. Suspected UTI source. Blood cx drawn. Started broad-spectrum abx. ICU consult.",A41,1,0.91,1299,,A41,1,,1858,,,0,,0,
+B20_en,en,templated,B20,HIV disease,Patient diagnosed with HIV disease. Assessment and plan documented.,B20,1,1.0,222,,B20,1,,2115,,B20,1,,0,

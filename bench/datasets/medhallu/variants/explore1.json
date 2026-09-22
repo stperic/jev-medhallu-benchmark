@@ -1,0 +1,115 @@
+{
+  "name": "medhallu",
+  "source": "MedHELM v4.0.0 medhallu (gs://crfm-helm-public/medhelm) over hf://datasets/UTAustin-AIHealth/MedHallu",
+  "published_source": "Stanford CRFM, MedHELM v4.0.0",
+  "type": "noul",
+  "instructions": {
+    "question": "Does `answer` contain non-factual or hallucinated information?",
+    "inspect": "`answer`, a proposed answer to `question`. `knowledge` is the world knowledge to judge it against.",
+    "focus": "Determine if there is a factual contradiction between `answer` and `knowledge`. Some information in `answer` might be fabricated."
+  },
+  "labels": {
+    "1": {
+      "what": "Hallucinated: `answer` falls into at least one of the hallucination types",
+      "hallucination_types": {
+        "Misinterpretation of the question": "`answer` misunderstands `question`, leading to an off-topic or irrelevant response",
+        "Incomplete information": "`answer` points out what is not true without providing the correct information",
+        "Mechanism and pathway misattribution": "`answer` falsely attributes biological mechanisms, molecular pathways or disease processes, contradicting established medical knowledge",
+        "Methodological and evidence fabrication": "`answer` invents false research methods, statistical data or specific clinical outcomes"
+      }
+    },
+    "0": {
+      "what": "Factual: `answer` is consistent with `knowledge` and contains no fabricated information"
+    }
+  },
+  "positive": "1",
+  "slice_fields": [
+    "gold",
+    "difficulty",
+    "category"
+  ],
+  "jev_questions": {
+    "v2": {
+      "instructions": {
+        "question": "Does `answer` contain non-factual or hallucinated information?",
+        "inspect": "`answer`, a proposed answer to `question`. `knowledge` is the world knowledge to judge it against.",
+        "focus": "Determine if there is a factual contradiction between `answer` and `knowledge`. Some information in `answer` might be fabricated."
+      },
+      "criteria": {
+        "true": {
+          "what": "Hallucinated: `answer` falls into at least one of the hallucination types",
+          "hallucination_types": {
+            "Misinterpretation of the question": "`answer` misunderstands `question`, leading to an off-topic or irrelevant response",
+            "Incomplete information": "`answer` points out what is not true without providing the correct information",
+            "Mechanism and pathway misattribution": "`answer` falsely attributes biological mechanisms, molecular pathways or disease processes, contradicting established medical knowledge",
+            "Methodological and evidence fabrication": "`answer` invents false research methods, statistical data or specific clinical outcomes"
+          }
+        },
+        "false": {
+          "what": "Factual: `answer` is consistent with `knowledge` and contains no fabricated information"
+        }
+      }
+    },
+    "boundary": {
+      "instructions": {
+        "question": "Does `answer` misstate what the study in `knowledge` found about `question`?",
+        "inspect": "`answer`, a proposed answer to `question`. `knowledge` is the abstract of the study, without its conclusion.",
+        "focus": "A correct answer is the conclusion the study's authors would draw. It may summarize, generalize, or mention limitations and implications that `knowledge` does not spell out. A misstatement sounds equally plausible but changes the finding."
+      },
+      "criteria": {
+        "true": {
+          "what": "Misstates the study: `answer` changes the direction, strength or subject of the finding, credits a mechanism or cause the study did not examine, invents methods, numbers or outcomes, or answers something other than `question`",
+          "hallucination_types": {
+            "Misinterpretation of the question": "`answer` misunderstands `question`, leading to an off-topic or irrelevant response",
+            "Incomplete information": "`answer` points out what is not true without providing the correct information",
+            "Mechanism and pathway misattribution": "`answer` falsely attributes biological mechanisms, molecular pathways or disease processes, contradicting established medical knowledge",
+            "Methodological and evidence fabrication": "`answer` invents false research methods, statistical data or specific clinical outcomes"
+          }
+        },
+        "false": {
+          "what": "Faithful: `answer` is a conclusion that the results in `knowledge` support, even if it is worded more generally than `knowledge` or adds a caveat"
+        }
+      }
+    },
+    "signals": {
+      "instructions": {
+        "question": "Does `answer` misstate what the study in `knowledge` found about `question`?",
+        "inspect": "`answer`, a proposed answer to `question`. `knowledge` is the abstract of the study, without its conclusion.",
+        "focus": "A correct answer is the conclusion the study's authors would draw. It may summarize, generalize, or mention limitations and implications that `knowledge` does not spell out. A misstatement sounds equally plausible but changes the finding."
+      },
+      "criteria": {
+        "true": {
+          "what": "Misstates the study: `answer` changes the direction, strength or subject of the finding, credits a mechanism or cause the study did not examine, invents methods, numbers or outcomes, or answers something other than `question`",
+          "signals": [
+            "Names a specific pathway, receptor, gene or mechanism that `knowledge` never mentions",
+            "States the opposite direction of effect, or a stronger or weaker effect, than the results in `knowledge`",
+            "Swaps the outcome, population or comparison that `question` asks about for a different one",
+            "Only denies something without saying what the study actually found",
+            "Cites figures, tests or study methods that do not appear in `knowledge`"
+          ]
+        },
+        "false": {
+          "what": "Faithful: `answer` is a conclusion that the results in `knowledge` support, even if it is worded more generally than `knowledge` or adds a caveat",
+          "signals": [
+            "Restates the main result reported in `knowledge`",
+            "Hedged summary such as 'may', 'suggests', 'further studies are needed'",
+            "Mentions clinical implications or limitations that follow from the results"
+          ]
+        }
+      }
+    },
+    "contradiction": {
+      "instructions": "Does `answer` assert a finding, a direction of effect, or a cause that the results in `knowledge` contradict?"
+    },
+    "unsupported_specifics": {
+      "instructions": "Does `answer` name a specific mechanism, pathway, method, statistic or outcome that appears nowhere in `knowledge`?"
+    },
+    "off_target": {
+      "instructions": "Does `answer` respond to something other than what `question` asks, or only deny a claim without stating what the study found?"
+    },
+    "authors_reject": {
+      "instructions": "Would the authors of the study described in `knowledge` say that `answer` misrepresents their findings?"
+    }
+  },
+  "jev_combine": "mean"
+}

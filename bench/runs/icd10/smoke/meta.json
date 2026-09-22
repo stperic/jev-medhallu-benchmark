@@ -1,0 +1,31 @@
+{
+  "created": "2026-09-21T15:47:44+00:00",
+  "task_fp": "72b07c4e129ee7a9",
+  "task": "datasets/icd10/data/task.json",
+  "items": "datasets/icd10/data/items.jsonl",
+  "items_sha256": "abbfda2fefa8ae39",
+  "jev_base_url": "https://openrouter.ai/api",
+  "runs": [
+    {
+      "at": "2026-09-21T15:47:44+00:00",
+      "models": [
+        "jev-1.13",
+        "anthropic/claude-opus-5@low",
+        "stringmatch"
+      ],
+      "repeats": 1,
+      "concurrency": 1,
+      "providers": [
+        "anthropic/claude-opus-5=anthropic"
+      ],
+      "max_tokens": 16000,
+      "filters": [],
+      "limit": 5,
+      "versions": {
+        "python": "3.12.10",
+        "typesafe-sdk": "0.7.0",
+        "httpx2": "2.13.0"
+      }
+    }
+  ]
+}
