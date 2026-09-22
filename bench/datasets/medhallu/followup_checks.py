@@ -119,6 +119,71 @@ def check3() -> None:
     print()
 
 
+def wilson(correct: int, n: int, z: float = 1.96) -> tuple[float, float]:
+    p = correct / n
+    centre, half = p + z * z / (2 * n), z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n))
+    return 100 * (centre - half) / (1 + z * z / n), 100 * (centre + half) / (1 + z * z / n)
+
+
+def check4(gold: dict, band: float = 0.1) -> None:
+    print(f"## Check 4: Jev first, an LLM for the uncertain rest (Jev decides when P <= {band} or >= {1 - band:.1f})\n")
+    jev = records("test-v2", "jev-1.13")
+    p_hall = {i: r["probabilities"]["1"] for i, r in jev.items()}
+    jev_alone = labels(jev)
+    sure = {i for i, p in p_hall.items() if p <= band or p >= 1 - band}
+    print(f"Jev decides {len(sure) / 10:.1f}% of items, {accuracy({i: jev_alone[i] for i in sure}, {i: gold[i] for i in sure}):.1f}% of them correctly.\n")
+
+    def timing(ms: list[float]) -> str:
+        ms = sorted(ms)
+        return f"{statistics.mean(ms):,.0f} / {statistics.median(ms):,.0f} / {ms[int(0.95 * len(ms))]:,.0f} ms"
+
+    jev_ms = {i: r["latency_ms"] for i, r in jev.items()}
+    jev_cost = sum(r["cost"] for r in jev.values())
+    rows = []
+    for spec, name in LLMS.items():
+        answers = records("test-llm-authors-question", spec)
+        llm_ms = {i: r["latency_ms"] for i, r in records("test-v2", spec).items()}
+        alone = labels(answers)
+        cascade = {i: ("1" if p_hall[i] >= 0.5 else "0") if i in sure else alone[i] for i in gold}
+        cost = jev_cost + sum(answers[i]["cost"] for i in gold if i not in sure)
+        ms = [jev_ms[i] + (0 if i in sure else llm_ms[i]) for i in gold]
+        rows.append((name, cascade, alone, cost, ms, sum(r["cost"] for r in answers.values()), list(llm_ms.values())))
+    p_llm = holm([mcnemar(r[1], r[2], gold)[2] for r in rows])
+    p_jev = holm([mcnemar(r[1], jev_alone, gold)[2] for r in rows])
+    print("| Setup | Accuracy [95% CI] | Sent to LLM | Cost per 1,000 | Time mean / median / p95 | Holm p vs LLM alone | Holm p vs Jev alone |")
+    print("|---|---|---|---|---|---|---|")
+    n_ok = sum(jev_alone[i] == g for i, g in gold.items())
+    lo, hi = wilson(n_ok, len(gold))
+    print(f"| Jev alone | {accuracy(jev_alone, gold):.1f}% [{lo:.1f}, {hi:.1f}] | 0% | USD {jev_cost:.2f} | {timing(list(jev_ms.values()))} | | |")
+    for (name, cascade, alone, cost, ms, llm_cost, llm_ms), pl, pj in zip(rows, p_llm, p_jev):
+        for label, pred, c, t, extra in (
+            (f"{name} alone", alone, llm_cost, llm_ms, "| |"),
+            (f"Jev, then {name}", cascade, cost, ms, f"| {pl:.2g} | {pj:.2g} |"),
+        ):
+            ok = sum(pred[i] == g for i, g in gold.items())
+            lo, hi = wilson(ok, len(gold))
+            sent = "100%" if pred is alone else f"{100 - len(sure) / 10:.1f}%"
+            print(f"| {label} | {ok / 10:.1f}% [{lo:.1f}, {hi:.1f}] | {sent} | USD {c:.2f} | {timing(t)} {extra}")
+    print()
+
+
+def check4_sweep(gold: dict) -> None:
+    print("Exploratory, not preregistered: other bands (accuracy of the cascade, share sent to the LLM)\n")
+    jev = records("test-v2", "jev-1.13")
+    p_hall = {i: r["probabilities"]["1"] for i, r in jev.items()}
+    alone = {spec: labels(records("test-llm-authors-question", spec)) for spec in LLMS}
+    print("| Band | Sent to LLM | " + " | ".join(LLMS.values()) + " |")
+    print("|---|---|" + "---|" * len(LLMS))
+    for band in (0.05, 0.1, 0.15, 0.2, 0.25, 0.3):
+        sure = {i for i, p in p_hall.items() if p <= band or p >= 1 - band}
+        accs = []
+        for spec in LLMS:
+            pred = {i: ("1" if p_hall[i] >= 0.5 else "0") if i in sure else alone[spec][i] for i in gold}
+            accs.append(f"{accuracy(pred, gold):.1f}%")
+        print(f"| {band:.2f} / {1 - band:.2f} | {100 - len(sure) / 10:.1f}% | " + " | ".join(accs) + " |")
+    print()
+
+
 def main() -> None:
     # Not splitlines(): it also breaks on U+2028 and friends, which occur inside abstracts.
     items = [json.loads(line) for line in ITEMS.read_text().split("\n") if line.strip()]
@@ -128,6 +193,9 @@ def main() -> None:
             fn(gold)
     if (RUNS / "timing-interleaved").is_dir():
         check3()
+    if (RUNS / "test-llm-authors-question").is_dir():
+        check4(gold)
+        check4_sweep(gold)
 
 
 if __name__ == "__main__":

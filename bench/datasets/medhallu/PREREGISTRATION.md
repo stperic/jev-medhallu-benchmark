@@ -268,3 +268,23 @@ accuracy of the LLM at a fraction of its time and cost?
   each LLM from its `test-v2` row on the same item (the MedHELM-style prompt,
   since the check-2 runs were not timed one request at a time). Mean, median
   and 95th percentile.
+
+## Results of check 4 (2026-09-22)
+
+Tables: `uv run datasets/medhallu/followup_checks.py`.
+
+Jev was at least 90% sure on 372 items (37.2%) and right on 370. On all 372,
+each of the four LLMs gave the same answer as Jev, including Jev's two errors.
+So every cascade has exactly the accuracy of its LLM alone (GPT-5.6 Luna 95.1%,
+Gemini 3.5 Flash Lite 95.0%, Gemini 3.8 Flash 94.8%, Claude Haiku 4.5 92.4%)
+while sending 62.8% of items to the LLM. Cost per 1,000 checks falls by 10%
+(Luna, USD 0.11 to 0.10) to 33% (Haiku, USD 0.70 to 0.47). Mean time falls for
+the slower LLMs (Luna 1,211 to 977 ms) but not for Flash Lite (552 to 561 ms),
+and median and 95th-percentile times rise slightly, because items sent on pay
+for both calls.
+
+Exploratory, chosen after seeing test results: with a 0.8 / 0.2 band, Jev
+decides 68.8% of items (98.4% correct) and the cascades lose at most 0.2
+points (Flash Lite 95.2%, Luna 94.9%, Haiku 92.7%, Gemini 3.8 Flash 94.7%) at
+about half the LLM's cost or less, with a median time of 226 ms. That band must
+be confirmed on data not used here before it is relied on.
