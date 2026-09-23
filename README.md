@@ -48,7 +48,11 @@ were run with Jev's question only and timed on that run.
   percentile about three times Jev's, and left some requests hanging (check 5).
 - **Probability.** Jev returns one (AUROC 0.974): on the 37% of items where it
   is at least 90% confident, it is 99.5% accurate. None of these four LLMs offer
-  log-probabilities through OpenRouter.
+  log-probabilities through OpenRouter. The probability sorts answers well but
+  its numbers are not literal odds: of the answers it put near 14%, 2% were
+  hallucinated, and of those near 65%, 43% were, so set cut-offs on your own data
+  ([`test-v2/calibration.md`](bench/runs/medhallu/test-v2/calibration.md),
+  exploratory).
 - **Jev first, LLM for the rest.** On those 37% of items, all four LLMs gave
   the same answer as Jev. Letting Jev settle them and sending the rest to an
   LLM keeps the LLM's accuracy exactly with 37% fewer LLM calls (check 4 in
