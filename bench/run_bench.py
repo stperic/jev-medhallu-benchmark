@@ -165,7 +165,7 @@ class OpenRouterChatAdapter:
         self.http = httpx2.AsyncClient(
             base_url=os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1").rstrip("/"),
             headers={"Authorization": f"Bearer {openrouter_key()}", "X-Title": "jev-icd10-benchmark"},
-            timeout=600.0,
+            timeout=args.timeout,
         )
 
     async def predict(self, item: dict) -> dict[str, Any]:
@@ -440,6 +440,8 @@ def main() -> None:
     parser.add_argument("--max-attempts", type=int, default=4)
     parser.add_argument("--warmup", type=int, default=1,
                         help="untimed calls per model before the run, so latency excludes connection setup")
+    parser.add_argument("--timeout", type=float, default=600.0,
+                        help="chat models: seconds per attempt; a timeout is retried like other transport failures")
     parser.add_argument("--max-tokens", type=int, default=16000,
                         help="chat models: output cap, which also bounds reasoning")
     parser.add_argument(

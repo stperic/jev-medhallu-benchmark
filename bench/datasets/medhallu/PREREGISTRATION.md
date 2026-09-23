@@ -341,3 +341,43 @@ Reported as in check 4, with times from the accuracy run (Jev from `test-v2`).
 **One run per model.** Whatever each model scores is reported. An interrupted
 run resumes without re-asking answered items. A model that cannot finish is
 reported as such, not replaced.
+
+## Results of check 5 (2026-09-23)
+
+Tables: `uv run datasets/medhallu/followup_checks.py`. All 2,000 accuracy
+calls and 600 timing calls completed with no errors.
+
+**Deviation from the plan, during the accuracy run.** Cerebras intermittently
+left a request hanging, and the runner's 600-second timeout stalled the run for
+ten minutes at a time. After 29 of the 1,000 GPT-OSS 120b answers, the run was
+stopped and resumed (as the plan allows) with a new `--timeout` option set to
+30 seconds for these chat models; the default stays 600, so earlier runs are
+unaffected. A timeout counts as a transport failure and is retried, as planned.
+The code change shows in `code_sha256` in `meta.json`. Times are those of the
+successful attempt, so the medians do not include the hangs: the "calls
+retried" counts below do.
+
+**Accuracy (Jev's question, 1,000 test items).** Both GPT-OSS rows are
+significantly *less* accurate than Jev run 2 (92.9%):
+
+| Model | Accuracy [95% CI] | Holm p vs Jev | Cost per 1,000 | Median / 95th pct | Calls retried |
+|---|---|---|---|---|---|
+| GPT-OSS 120b on Cerebras, reasoning low | 90.0% [88.0, 91.7] | 0.0008 | USD 0.27 | 236 / 1,096 ms | 24 |
+| GPT-OSS 20b on Groq, reasoning low | 86.8% [84.6, 88.8] | < 0.0001 | USD 0.07 | 388 / 778 ms | 14 |
+
+**Same-session timing (200 items, 10 alternating rounds).** Medians: Jev 233
+ms, GPT-OSS 120b on Cerebras 238 ms (1.0 times Jev), GPT-OSS 20b on Groq 356
+ms (1.5 times). 95th percentiles: Jev 347 ms, Cerebras 1,162 ms, Groq 684 ms.
+Retried calls: Jev 0, Cerebras 5, Groq 2.
+
+**Jev first (0.9 band).** It keeps each GPT-OSS row's accuracy (120b 90.0%, 20b
+87.1%) and cuts the 120b row's cost from USD 0.27 to 0.20 per 1,000, but it
+adds time (median 407 ms for 120b), since Jev is as fast as that LLM. With a
+less accurate LLM, Jev-first cannot beat Jev alone on accuracy either.
+
+**Reading.** Typical speed alone no longer sets Jev apart: an open model on
+Cerebras matches Jev's median time. Jev still leads this comparison on
+accuracy (2.9 points over the fast one), cost (9 times cheaper than it), tail
+time (95th percentile about a third) and reliability (no hangs), and it
+returns a probability. Against the slower hosted LLMs of check 2, which are
+about 2 points more accurate than Jev, the trade-off stands as before.

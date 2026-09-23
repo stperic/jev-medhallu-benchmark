@@ -13,7 +13,10 @@ edited.
 `code_sha256` in `meta.json` records the harness version each run used. Jev
 run 2, the four LLM rows and every run from the question search onward
 (`test-v2`, the three follow-up checks, `dev-explore1`, `dev-explore2`, `dev2-*`,
-`dev-*-smoke`, `icd10/full-v1`) match `run_bench.py` and `common.py` as committed. Earlier runs
+`dev-*-smoke`, `icd10/full-v1`) match `common.py` as committed and `run_bench.py` as
+committed before check 5. Check 5 (2026-09-23) added a `--timeout` option to
+`run_bench.py`, its only change: runs from then on, and the GPT-OSS answers after
+the first 29, match the current file. Earlier runs
 (`test`, `test-repeat2`, `old-dev-sample/*`) used earlier working versions of
 the harness, before this repo had version control; those versions were not
 kept. `icd10/smoke` predates hash recording.
@@ -26,13 +29,18 @@ kept. `icd10/smoke` predates hash recording.
 | `medhallu/test-v2` | **Jev run 2**: Jev asked the question chosen on dev (92.9% at threshold 0.65), **plus four current fast LLMs** added on 2026-09-22: GPT-5.6 Luna (reasoning none), Gemini 3.8 Flash (reasoning minimal), Gemini 3.5 Flash Lite, Claude Haiku 4.5. |
 | `medhallu/test-repeat2` | A 12-item repeat of Jev run 1, to check that Jev's answers are stable: probabilities moved by at most 0.03 (mean 0.006), no label changed. Same question as run 1, so no test information fed into run 2. |
 | `medhallu/test-nosource` | Follow-up check 1: the test items with the abstract replaced by "Not provided." (`data/items.test-nosource.jsonl`, from `datasets/medhallu/ablate_source.py`), Jev and the four LLMs. Shows how much each score depends on the source. |
-| `medhallu/test-llm-authors-question` | Follow-up check 2: the four LLMs asked Jev's run-2 question with Yes/No labels (`variants/llm-authors-question.task.json`). Scored with `--no-published`. |
+| `medhallu/test-llm-authors-question` | Follow-up check 2: the four LLMs asked Jev's run-2 question with Yes/No labels (`variants/llm-authors-question.task.json`). Scored with `--no-published`. Also holds the two GPT-OSS rows of check 5 (Cerebras and Groq, timed one request at a time). |
+| `medhallu/timing-oss` | Check 5 timing: Jev (`jev/`, its run-2 question) and the two GPT-OSS rows (`llm/`) on the first 200 test items, 10 alternating rounds, run by `timing-oss.sh`. |
 | `medhallu/timing-interleaved` | Follow-up check 3: all five models re-timed on the first 200 test items in one session, 10 rounds of 20 with the model order rotated each round (hence 50 invocations in `meta.json`). |
 
 The choices behind each test run and follow-up check were written down
 beforehand in `datasets/medhallu/PREREGISTRATION.md`, which also reports the
 results. `uv run datasets/medhallu/followup_checks.py` prints the follow-up
 tables from these files.
+
+`uv run datasets/medhallu/calibration.py` writes `test-v2/calibration.md` and
+`calibration.png`: a threshold-free reliability check of Jev's probability
+(exploratory, added after the runs, not preregistered; reads run files only).
 
 `predictions.csv` and `results.xlsx` for `test` and `test-v2` are not committed,
 because they embed Stanford MedHELM's per-item predictions, which this repo does
@@ -56,6 +64,7 @@ uv run score.py runs/medhallu/test --task datasets/medhallu/variants/test-run1.t
 | `medhallu/dev2-final` | The chosen question alone on `dev2`. |
 | `medhallu/dev-flagship-smoke` | 5 items: Claude Fable 5.1, GPT-6 Astra, Gemini 3.1 Pro, for latency and cost only. Rejected as too slow for an inline check. |
 | `medhallu/dev-fast-smoke` | 20 items: fast models at default and low reasoning, for latency, cost and plumbing only. Used to pick the four LLM rows in `test-v2`. |
+| `medhallu/dev-oss-smoke-a`, `-b` | 20 items: Jev and GPT-OSS on fast providers (120b on Cerebras, 20b on Groq in `-a`; 120b on Groq in `-b`), for latency and cost only. Used to pick the two rows of check 5. |
 
 Re-score a dev run with its own task file, for example
 `uv run score.py runs/medhallu/dev-explore1`.

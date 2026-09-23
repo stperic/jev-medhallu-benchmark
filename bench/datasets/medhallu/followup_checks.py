@@ -184,6 +184,76 @@ def check4_sweep(gold: dict) -> None:
     print()
 
 
+OSS = {
+    "openai/gpt-oss-120b@low": "GPT-OSS 120b on Cerebras, reasoning low",
+    "openai/gpt-oss-20b@low": "GPT-OSS 20b on Groq, reasoning low",
+}
+
+
+def check5(gold: dict, band: float = 0.1) -> None:
+    print("## Check 5: GPT-OSS on fast inference hardware\n")
+    jev = records("test-v2", "jev-1.13")
+    jev_alone = labels(jev)
+    p_hall = {i: r["probabilities"]["1"] for i, r in jev.items()}
+    sure = {i for i, p in p_hall.items() if p <= band or p >= 1 - band}
+    jev_ms = {i: r["latency_ms"] for i, r in jev.items()}
+    jev_cost = sum(r["cost"] for r in jev.values())
+
+    def retried(recs: dict[str, dict]) -> int:
+        """Calls that needed more than one attempt (a hang or transport failure); times are of the last attempt."""
+        return sum(r.get("attempts", 1) > 1 for r in recs.values())
+
+    def pct(ms: list[float], q: float) -> float:
+        ms = sorted(ms)
+        return ms[min(len(ms) - 1, int(q * len(ms)))]
+
+    runs = {spec: records("test-llm-authors-question", spec) for spec in OSS}
+    p_jev = holm([mcnemar(labels(runs[s]), jev_alone, gold)[2] for s in OSS])
+    print(f"Jev run 2: {accuracy(jev_alone, gold):.1f}%, USD {jev_cost:.3f} per 1,000, "
+          f"median {statistics.median(jev_ms.values()):,.0f} ms (test-v2)\n")
+    print("| Model | Accuracy [95% CI] | Only LLM right / only Jev right | Holm p vs Jev | Cost per 1,000 | Median / p95 | Errors | Calls retried |")
+    print("|---|---|---|---|---|---|---|---|")
+    for (spec, name), pj in zip(OSS.items(), p_jev):
+        recs, pred = runs[spec], labels(runs[spec])
+        ok = sum(pred.get(i) == g for i, g in gold.items())
+        lo, hi = wilson(ok, len(gold))
+        a, b, _ = mcnemar(pred, jev_alone, gold)
+        ms = [r["latency_ms"] for r in recs.values() if not r.get("error")]
+        cost = sum(r["cost"] or 0 for r in recs.values())
+        errors = sum(bool(r.get("error")) for r in recs.values())
+        print(f"| {name} | {ok / 10:.1f}% [{lo:.1f}, {hi:.1f}] | {a} / {b} | {pj:.2g} | USD {cost:.3f} | "
+              f"{statistics.median(ms):,.0f} / {pct(ms, 0.95):,.0f} ms | {errors} | {retried(recs)} |")
+
+    print("\nSame-session timing (first 200 test items, 10 alternating rounds):\n")
+    print("| Model | Median | 95th pct | x Jev | n | Calls retried |")
+    print("|---|---|---|---|---|---|")
+    timed = {"jev-1.13": ("Jev 1.13", records("timing-oss/jev", "jev-1.13"))}
+    timed |= {spec: (name, records("timing-oss/llm", spec)) for spec, name in OSS.items()}
+    jev_now = statistics.median(r["latency_ms"] for r in timed["jev-1.13"][1].values())
+    for name, recs in timed.values():
+        ms = [r["latency_ms"] for r in recs.values() if not r.get("error")]
+        print(f"| {name} | {statistics.median(ms):,.0f} ms | {pct(ms, 0.95):,.0f} ms | "
+              f"{statistics.median(ms) / jev_now:.1f} | {len(ms)} | {retried(recs)} |")
+
+    print(f"\nJev first (check 4 rule: Jev decides when P <= {band} or >= {1 - band:.1f}, {len(sure) / 10:.1f}% of items):\n")
+    print("| Setup | Accuracy [95% CI] | Holm p vs LLM alone | Cost per 1,000 | Time mean / median / p95 |")
+    print("|---|---|---|---|---|")
+    rows = []
+    for spec, name in OSS.items():
+        recs, alone = runs[spec], labels(runs[spec])
+        cascade = {i: ("1" if p_hall[i] >= 0.5 else "0") if i in sure else alone[i] for i in gold}
+        cost = jev_cost + sum(recs[i]["cost"] or 0 for i in gold if i not in sure)
+        ms = [jev_ms[i] + (0 if i in sure else recs[i]["latency_ms"]) for i in gold]
+        rows.append((name, cascade, alone, cost, ms))
+    p_llm = holm([mcnemar(r[1], r[2], gold)[2] for r in rows])
+    for (name, cascade, _, cost, ms), pl in zip(rows, p_llm):
+        ok = sum(cascade[i] == g for i, g in gold.items())
+        lo, hi = wilson(ok, len(gold))
+        print(f"| Jev, then {name} | {ok / 10:.1f}% [{lo:.1f}, {hi:.1f}] | {pl:.2g} | USD {cost:.3f} | "
+              f"{statistics.mean(ms):,.0f} / {statistics.median(ms):,.0f} / {pct(ms, 0.95):,.0f} ms |")
+    print()
+
+
 def main() -> None:
     # Not splitlines(): it also breaks on U+2028 and friends, which occur inside abstracts.
     items = [json.loads(line) for line in ITEMS.read_text().split("\n") if line.strip()]
@@ -196,6 +266,8 @@ def main() -> None:
     if (RUNS / "test-llm-authors-question").is_dir():
         check4(gold)
         check4_sweep(gold)
+    if (RUNS / "timing-oss").is_dir():
+        check5(gold)
 
 
 if __name__ == "__main__":
