@@ -288,3 +288,56 @@ decides 68.8% of items (98.4% correct) and the cascades lose at most 0.2
 points (Flash Lite 95.2%, Luna 94.9%, Haiku 92.7%, Gemini 3.8 Flash 94.7%) at
 about half the LLM's cost or less, with a median time of 226 ms. That band must
 be confirmed on data not used here before it is relied on.
+
+# Check 5: GPT-OSS on fast inference hardware. Choices fixed before the runs
+
+Written 2026-09-23, before either model below was run on `items.test.jsonl`.
+
+**Question.** TypeSafe describes Jev as up to 200 times faster than frontier
+LLMs, but that ratio is measured against slow reasoning models. The fair rival
+for an inline check is a small open model on hardware built for fast
+inference. How close does it get to Jev on time, and at what accuracy and cost?
+
+**Smoke test (dev, 20 items, one request at a time, providers pinned, Jev in
+the same session; latency and cost only, 20 items cannot rank accuracy):**
+`runs/medhallu/dev-oss-smoke-a` and `-b`. Median / 90th percentile, USD per
+1,000 checks billed by OpenRouter: Jev 220 / 264 ms, 0.029; GPT-OSS 120b on
+Cerebras 228 / 317 ms, 0.268; GPT-OSS 120b on Groq 341 / 495 ms, 0.122;
+GPT-OSS 20b on Groq 401 / 684 ms, 0.067. No errors.
+
+**Models, settings and providers** (provider pinned, no fallbacks,
+`require_parameters`; reasoning effort `low`, the lowest GPT-OSS offers):
+
+| Spec | Provider | Why | LiteLLM list price, USD per 1M in / out (sheet main@2026-09-23) |
+|---|---|---|---|
+| `openai/gpt-oss-120b@low` | Cerebras | fastest LLM measured | 0.35 / 0.75 (`cerebras/gpt-oss-120b`) |
+| `openai/gpt-oss-20b@low` | Groq | cheapest fast LLM measured | 0.075 / 0.30 (`groq/openai/gpt-oss-20b`) |
+
+Dropped: GPT-OSS 120b on Groq (same model as the Cerebras row, slower).
+
+**Accuracy run.** Task `variants/llm-authors-question.task.json` (Jev's run-2
+question, as the LLMs got it in check 2), test split, all 1,000 items, one pass
+per model, **concurrency 1** so every answer is also timed, one untimed warm-up
+call, `max_tokens` 16000. Only transport failures are retried; a refusal,
+truncation or out-of-set label counts as wrong. Written into
+`runs/medhallu/test-llm-authors-question` next to the four check-2 LLMs (backed
+up first), so paired tests use the same items. Reported: accuracy with a 95%
+Wilson interval, paired exact McNemar against Jev run 2 (threshold 0.65),
+Holm-corrected within this family of two.
+
+**Timing run.** Same design as check 3: the first 200 test items in 10 rounds
+of 20, Jev and the two GPT-OSS specs one after another with the order rotated
+every round, one request at a time, one untimed warm-up call per model per
+round, nothing else running. Jev asks its exact run-2 question (`data/task.json`,
+output `runs/medhallu/timing-oss/jev`); the GPT-OSS rows get the accuracy-run
+task (output `runs/medhallu/timing-oss/llm`), so this time the LLMs are timed
+with the prompt behind their accuracy result. Reported: median and 95th
+percentile per model and the ratio to Jev in this session.
+
+**Jev first (check 4 rule, unchanged).** Jev decides when its probability is at
+least 0.9 or at most 0.1; otherwise the GPT-OSS answer from the accuracy run.
+Reported as in check 4, with times from the accuracy run (Jev from `test-v2`).
+
+**One run per model.** Whatever each model scores is reported. An interrupted
+run resumes without re-asking answered items. A model that cannot finish is
+reported as such, not replaced.
